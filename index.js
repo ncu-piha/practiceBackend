@@ -1,13 +1,40 @@
-require("dotenv").config()
-const express=require("express");
-const app=express();
-let port=4000;
 
-app.get("/",(req,res)=>{
-    res.send("hello");
+//const express=require("express");
+import express from "express";
+const app = express();
+//require("dotenv").config()
+let port = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(express.static('dist'));
+// app.get("/",(req,res)=>{
+//     res.send("hello");
+// })
+
+app.get("/api/jokes", (req, res) => {
+    let jokes = [
+        {
+            "title": "jokes",
+            "name": "joke1"
+        },
+        {
+            "title": "jokes",
+            "name": "joke2"
+        },
+        {
+            "title": "jokes",
+            "name": "joke3"
+        },
+        {
+            "title": "jokes",
+            "name": "joke4"
+        }
+    ]
+
+    res.send(jokes);
 })
 
 
-app.listen(process.env.PORT,()=>{
+app.listen(port, () => {
     console.log(`Server is listening on port -> ${port}`);
-})
+})  
